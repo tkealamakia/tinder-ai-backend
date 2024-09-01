@@ -1,11 +1,11 @@
 package com.kealamakia.tinderaibackend.matches;
 
 import com.kealamakia.tinderaibackend.conversations.Conversation;
-import com.kealamakia.tinderaibackend.conversations.ConversationController;
 import com.kealamakia.tinderaibackend.conversations.ConversationRepository;
 import com.kealamakia.tinderaibackend.profiles.Profile;
 import com.kealamakia.tinderaibackend.profiles.ProfileRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,7 +39,7 @@ public class MatchController {
     // TODO make sure there are no existing conversations with this profile already
     Conversation conversation = new Conversation(
         UUID.randomUUID().toString(),
-        request.profileId(),
+        profile.id(),
         List.of()
     );
     conversationRepository.save(conversation);
@@ -47,5 +47,10 @@ public class MatchController {
     Match match = new Match(UUID.randomUUID().toString(),profile, conversation.id());
     matchRepository.save(match);
     return match;
+  }
+
+  @GetMapping("/matches")
+  public List<Match> getAllMatches() {
+    return matchRepository.findAll();
   }
 }
