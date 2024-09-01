@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class ConversationController {
 
@@ -21,6 +22,7 @@ public class ConversationController {
     this.profileRepository = profileRepository;
   }
 
+  @CrossOrigin(origins = "*")
   @PostMapping("/conversations")
   public Conversation createNewConversation(@RequestBody CreateConverstationRequest request) {
     profileRepository.findById(request.profileId())
@@ -35,6 +37,7 @@ public class ConversationController {
     return conversation;
   }
 
+  @CrossOrigin(origins = "*")
   @GetMapping("/conversations/{conversationId}")
   public Conversation getConversation(@PathVariable String conversationId) {
     Conversation conversation = conversationRepository.findById(conversationId)
@@ -43,6 +46,7 @@ public class ConversationController {
     return conversation;
   }
 
+  @CrossOrigin(origins = "*")
   @PostMapping("/conversations/{conversationId}")
   public Conversation addMessageToConversation(@PathVariable String conversationId,
                                                @RequestBody ChatMessage chatMessage) {

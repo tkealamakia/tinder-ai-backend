@@ -5,10 +5,7 @@ import com.kealamakia.tinderaibackend.conversations.ConversationRepository;
 import com.kealamakia.tinderaibackend.profiles.Profile;
 import com.kealamakia.tinderaibackend.profiles.ProfileRepository;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -30,6 +27,7 @@ public class MatchController {
   }
 
 
+  @CrossOrigin(origins = "*")
   @PostMapping("/matches")
   public Match createNewMatch(@RequestBody CreateMatchRequest request) {
     Profile profile = profileRepository.findById(request.profileId())
