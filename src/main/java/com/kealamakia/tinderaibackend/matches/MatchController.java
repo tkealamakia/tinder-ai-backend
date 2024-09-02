@@ -47,8 +47,14 @@ public class MatchController {
     return match;
   }
 
+  @CrossOrigin(origins = "*")
   @GetMapping("/matches")
   public List<Match> getAllMatches() {
     return matchRepository.findAll();
+  }
+
+  @DeleteMapping("/delete-matches")
+  public void deleteAllMatches() {
+    matchRepository.deleteAll();
   }
 }
